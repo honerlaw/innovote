@@ -1,0 +1,17 @@
+// Represents the project that a user voted on
+model ProjectUserVote {
+  id String @id @default(cuid())
+
+  // the user id
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  // the project id
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id])
+
+  vote Boolean
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

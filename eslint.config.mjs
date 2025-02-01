@@ -11,8 +11,15 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.config({
-    extends: ['next/core-web-vitals', 'next/typescript', 'prettier'],
-  })
+    plugins: ["no-relative-import-paths"],
+    extends: ["next/core-web-vitals", "next/typescript", "prettier"],
+    rules: {
+      "no-relative-import-paths/no-relative-import-paths": [
+        "error",
+        { allowSameFolder: false, rootDir: "src", prefix: "@" },
+      ],
+    },
+  }),
 ];
 
 export default eslintConfig;

@@ -3,17 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "postinstall": "npm run generate",
+    "clean": "rm -rf .next *.log next-env.d.ts",
+    "clean:install": "npm run clean && rm -rf package-lock.json node_modules && npm i",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
+    "generate": "prisma generate",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "prettier:write": "prettier --write src",
-    "format": "npm run lint:fix && npm run prettier:write"
+    "prettier:write": "prettier --write .",
+    "format": "npm run lint:fix && npm run prettier:write && prisma format"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.10.6",
+    "@prisma/client": "^6.3.0",
+    "newrelic": "^12.11.3",
     "next": "15.1.6",
+    "next-logger": "^5.0.1",
+    "pino": "^9.6.0",
     "prettier": "^3.4.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -26,7 +34,9 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
     "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-no-relative-import-paths": "^1.6.1",
     "postcss": "^8",
+    "prisma": "^6.3.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }

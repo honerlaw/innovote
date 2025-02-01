@@ -1,0 +1,11 @@
+model User {
+  id String @id @default(cuid())
+
+  // the clerk user id
+  authId String                 @unique
+  role   UserOrganizationRole[]
+  votes  ProjectUserVote[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

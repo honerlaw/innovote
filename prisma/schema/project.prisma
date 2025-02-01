@@ -1,0 +1,14 @@
+// represents a project that can be voted on in the event
+model Project {
+  id String @id @default(cuid())
+
+  title String
+
+  event   Event  @relation(fields: [eventId], references: [id])
+  eventId String
+
+  votes ProjectUserVote[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

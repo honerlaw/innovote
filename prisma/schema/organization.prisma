@@ -1,0 +1,11 @@
+// represents an organization, e.g. Credit Karma
+model Organization {
+  id String @id @default(cuid())
+
+  title String
+  role  UserOrganizationRole[]
+  event Event[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
