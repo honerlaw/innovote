@@ -2,9 +2,11 @@
 
 A simple application that allows for voting for projects.
 
-## Local Development
+## Environment Variables
 
 For local development, make sure to create a `.env` file and update the values.
+
+For production or other environments, make sure to put the secrets into vercel.
 
 A template of what values needs to be added can be found at `.example.env`.
 
