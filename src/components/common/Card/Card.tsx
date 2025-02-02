@@ -9,7 +9,14 @@ type CardProps = React.PropsWithChildren<{
 
 export const Card: React.FC<CardProps> = ({ link, onClick, children }) => {
   if (link) {
-    return <Link href={""}>{children}</Link>
+    return (
+      <Link
+        className="bg-white rounded-md shadow-md border border-gray-200 overflow-hidden"
+        href={link}
+      >
+        {children}
+      </Link>
+    )
   }
 
   return (

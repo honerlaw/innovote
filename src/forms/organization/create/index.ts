@@ -1,1 +1,1 @@
-export { CreateOrganizationModal } from "./CreateOrganizationModal"
+export { ActionModal as CreateOrganizationModal } from "./ActionModal"

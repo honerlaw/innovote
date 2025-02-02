@@ -8,6 +8,9 @@ model Event {
   startDate DateTime
   endDate   DateTime
 
+  // max number of votes per user in the event
+  maxVotes Int
+
   organization   Organization @relation(fields: [organizationId], references: [id])
   organizationId String
 

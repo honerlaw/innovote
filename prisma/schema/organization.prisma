@@ -6,6 +6,9 @@ model Organization {
   roles  UserOrganizationRole[]
   events Event[]
 
+  // the users who have actively selected this organization
+  users User[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

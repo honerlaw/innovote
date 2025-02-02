@@ -11,38 +11,47 @@ import {
 } from "@/components/common/Modal"
 import { TextInput } from "@/components/common/TextInput"
 import { useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { useCreateOrganization } from "@/forms/organization/create/action/useCreateOrganization"
+import { useAction } from "@/forms/organization/update/action/useAction"
+import { InputErrorMessage } from "@/components/common/InputErrorMessage"
 
-export const CreateOrganizationModal: React.FC = () => {
-  const router = useRouter()
-  const { open, setOpen } = useModalState(ModalName.CREATE_ORGANIZATION)
-  const { state, formAction } = useCreateOrganization()
+type ActionModalProps = {
+  id: string
+  name: string
+}
+
+export const ActionModal: React.FC<ActionModalProps> = ({ id, name }) => {
+  const { open, setOpen } = useModalState(ModalName.UPDATE_ORGANIZATION)
+  const { state, formAction, reset } = useAction(id, name)
 
   useEffect(() => {
-    if (state.errors !== null || state.id === null) {
+    if (!state.success || !open) {
       return
     }
 
-    // go to the organization page we just created
-    router.replace(`/organization/${state.id}`)
-  }, [state, router])
+    setOpen(false)
+
+    // reset the form action state
+    reset()
+  }, [state, open, setOpen, reset])
 
   return (
     <Modal open={open} onClose={() => setOpen(false)}>
       <form action={formAction}>
         <ModalContent>
-          <ModalTitle>Create organization</ModalTitle>
+          <ModalTitle>Update organization</ModalTitle>
+          <InputErrorMessage fieldName="form" errors={state.errors} />
           <TextInput
             id={"organization-name"}
             label="Name"
-            placeholder="Enter the name of your organization."
+            placeholder="Enter the new name of your organization."
             defaultValue={state.name}
+            fieldName="name"
+            errors={state.errors}
           />
         </ModalContent>
         <ModalFooter>
           <Button type="submit" variant="primary">
-            Create
+            Update
           </Button>
           <Button onClick={() => setOpen(false)}>Cancel</Button>
         </ModalFooter>

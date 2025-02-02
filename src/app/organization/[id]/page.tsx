@@ -1,9 +1,13 @@
 import { getOrganization } from "@/backend/service/getOrganization"
 import { isOrganizationAdmin } from "@/backend/service/isOrganizationAdmin"
 import { redirect } from "next/navigation"
-import { PlusCircleIcon } from "@heroicons/react/24/solid"
+import { PlusCircleIcon, EllipsisVerticalIcon } from "@heroicons/react/24/solid"
 import { Card, CardContent, CardFooter } from "@/components/common/Card"
 import { CreateEventCard } from "@/components/organization"
+import { Dropdown } from "@/components/common/Dropdown"
+import { UpdateOrganizationModal } from "@/forms/organization/update"
+import { ModalName } from "@/constants"
+import { selectOrganization } from "@/backend/service/selectOrganization"
 
 type Params = Promise<{ id: string }>
 
@@ -21,14 +25,28 @@ export default async function Organization({ params }: Props) {
     return redirect("/")
   }
 
+  await selectOrganization(org.id)
+
   return (
     <>
-      <h1 className="font-bold text-4xl py-12">{org.title}</h1>
+      <div className="flex flex-row justify-between items-center py-12">
+        <h1 className="font-bold text-4xl">{org.title}</h1>
+        <Dropdown
+          title={<EllipsisVerticalIcon className="size-6" />}
+          options={[
+            {
+              name: "Update",
+              link: `?modal=${ModalName.UPDATE_ORGANIZATION}`,
+            },
+          ]}
+        />
+        <UpdateOrganizationModal id={org.id} name={org.title} />
+      </div>
 
       <h2 className="font-bold text-3xl pb-8">Events</h2>
 
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
-        <CreateEventCard />
+        <CreateEventCard orgId={org.id} />
 
         <Card>
           <CardContent>

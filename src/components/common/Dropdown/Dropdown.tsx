@@ -1,6 +1,8 @@
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react"
-import { ChevronDownIcon } from "@heroicons/react/20/solid"
+"use client"
+
+import { Menu, MenuItem, MenuItems } from "@headlessui/react"
 import Link from "next/link"
+import { DropdownButton } from "@/components/common/Dropdown/DropdownTitle"
 
 type Option = {
   link: string
@@ -8,21 +10,20 @@ type Option = {
 }
 
 type DropdownProps = {
-  title: string
+  title: string | React.ReactNode
   options: Option[]
+  onClick?: (opt: Option) => void
 }
 
-export const Dropdown: React.FC<DropdownProps> = ({ title, options }) => {
+export const Dropdown: React.FC<DropdownProps> = ({
+  title,
+  options,
+  onClick,
+}) => {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50">
-          {title}
-          <ChevronDownIcon
-            aria-hidden="true"
-            className="-mr-1 size-5 text-gray-400"
-          />
-        </MenuButton>
+        <DropdownButton>{title}</DropdownButton>
       </div>
 
       <MenuItems
@@ -35,6 +36,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ title, options }) => {
               <MenuItem key={opt.name}>
                 <Link
                   href={opt.link}
+                  onClick={() => onClick?.(opt)}
                   className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
                 >
                   {opt.name}

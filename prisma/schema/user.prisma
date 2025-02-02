@@ -6,6 +6,10 @@ model User {
   roles  UserOrganizationRole[]
   votes  ProjectUserVote[]
 
+  // when you select an organiation / vist the page, we update this field
+  selectedOrganization   Organization? @relation(fields: [selectedOrganizationId], references: [id])
+  selectedOrganizationId String?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

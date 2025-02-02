@@ -1,4 +1,5 @@
 export type BaseActionState = {
+  success: boolean
   errors: {
     [inputName: string]: string[]
   } | null
@@ -6,6 +7,7 @@ export type BaseActionState = {
 }
 
 export const INITIAL_BASE_ACTION_STATE: BaseActionState = {
+  success: false,
   errors: null,
   message: "",
 }
