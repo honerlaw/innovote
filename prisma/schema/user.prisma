@@ -3,7 +3,7 @@ model User {
 
   // the clerk user id
   authId String                 @unique
-  role   UserOrganizationRole[]
+  roles  UserOrganizationRole[]
   votes  ProjectUserVote[]
 
   createdAt DateTime @default(now())

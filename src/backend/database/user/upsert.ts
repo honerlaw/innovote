@@ -1,6 +1,6 @@
-import { RoleType } from "@prisma/client";
-import { client } from "@/database/client";
-import { logger } from "@/utils/logger";
+import { RoleType } from "@prisma/client"
+import { client } from "@/backend/database/client"
+import { logger } from "@/utils/logger"
 
 export async function uspert(authId: string): Promise<boolean> {
   try {
@@ -10,7 +10,7 @@ export async function uspert(authId: string): Promise<boolean> {
       },
       create: {
         authId,
-        role: {
+        roles: {
           create: {
             roleType: RoleType.ADMIN,
             organization: {
@@ -22,12 +22,12 @@ export async function uspert(authId: string): Promise<boolean> {
         },
       },
       update: {},
-    });
-    return true;
+    })
+    return true
   } catch (err) {
     logger.error("Failed to upsert user", {
       error: err,
-    });
-    return false;
+    })
+    return false
   }
 }

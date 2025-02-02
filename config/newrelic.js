@@ -1,7 +1,7 @@
-"use strict";
+"use strict"
 
 // pull in the .env file
-process.loadEnvFile();
+process.loadEnvFile()
 
 /**
  * New Relic agent configuration.
@@ -10,6 +10,7 @@ process.loadEnvFile();
  * description of configuration variables and their potential values.
  */
 exports.config = {
+  foo: "bar",
   /**
    * Array of application names.
    */
@@ -75,4 +76,4 @@ exports.config = {
       "response.headers.x*",
     ],
   },
-};
+}
