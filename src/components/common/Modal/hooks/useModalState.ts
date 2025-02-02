@@ -19,6 +19,11 @@ export function useModalState(modalName: string) {
     if (modal === modalName) {
       setOpen(true)
     }
+
+    // the modal was closed by some other mechanism
+    if (modal === null) {
+      setOpen(false)
+    }
   }, [modalName, modal])
 
   const updateOpen = (open: boolean) => {

@@ -20,13 +20,12 @@ export const CreateOrganizationModal: React.FC = () => {
   const { state, formAction } = useCreateOrganization()
 
   useEffect(() => {
-    console.log(state)
     if (state.errors !== null || state.id === null) {
       return
     }
 
     // go to the organization page we just created
-    router.replace(`/organizations/${state.id}`)
+    router.replace(`/organization/${state.id}`)
   }, [state, router])
 
   return (

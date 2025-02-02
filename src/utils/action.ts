@@ -4,3 +4,8 @@ export type BaseActionState = {
   } | null
   message: string
 }
+
+export const INITIAL_BASE_ACTION_STATE: BaseActionState = {
+  errors: null,
+  message: "",
+}

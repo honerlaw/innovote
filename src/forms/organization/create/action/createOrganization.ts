@@ -3,6 +3,8 @@
 import { CreateOrganizationInput } from "@/forms/organization/create/action/schema"
 import { CreateOrganizationState } from "@/forms/organization/create/action/state"
 
+import { createOrganization as createOrgBackend } from "@/backend/service/createOrganization"
+
 export async function createOrganization(
   prevState: CreateOrganizationState,
   formData: FormData,
@@ -21,11 +23,21 @@ export async function createOrganization(
   }
 
   // @todo the actual creation of the organization would happen here
+  const org = await createOrgBackend(validated.data.name)
+
+  if (!org) {
+    return {
+      message: "Failed to create organization",
+      errors: null,
+      name: validated.data.name,
+      id: null,
+    }
+  }
 
   return {
     message: "Success.",
     errors: null,
     name: validated.data.name,
-    id: null,
+    id: org.id,
   }
 }

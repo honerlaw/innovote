@@ -3,10 +3,10 @@
 import { useActionState } from "react"
 import { createOrganization } from "@/forms/organization/create/action/createOrganization"
 import { CreateOrganizationState } from "@/forms/organization/create/action/state"
+import { INITIAL_BASE_ACTION_STATE } from "@/utils/action"
 
 const INITIAL_STATE: CreateOrganizationState = {
-  message: "",
-  errors: null,
+  ...INITIAL_BASE_ACTION_STATE,
 
   name: "",
 
